@@ -10,7 +10,8 @@ class Module extends \yii\base\Module
     /**
      * {@inheritdoc}
      */
-    public $layout = 'admin';
+    public $layout = 'admin';   // показываем modules/admin/views/layouts/admin.php (из layouts модуля admin)
+    // public $layout = '/admin'; // так выводит views/layouts/admin.php (из основной layouts)
 
     public $controllerNamespace = 'app\modules\admin\controllers';
 
