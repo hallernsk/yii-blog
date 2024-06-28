@@ -4,9 +4,13 @@ namespace app\modules\admin\controllers;
 
 use app\models\Article;
 use app\models\ArticleSearch;
+use app\models\ImageUpload;
+use Codeception\Lib\Di;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ArticleController implements the CRUD actions for Article model.
@@ -68,6 +72,12 @@ class ArticleController extends Controller
     public function actionCreate()
     {
         $model = new Article();
+        $model->load($this->request->post()); // true
+        // var_dump(Yii::$app->request->post()); // array (size=2) ... '_csrf', 'Article' => array
+        // var_dump($_POST['Article']); // то же самое
+        // $model->title = $_POST['Article']['title'];
+        // var_dump($model->attributes);
+        // die();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -114,6 +124,28 @@ class ArticleController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionSetImage($id)
+    {
+        $model = new ImageUpload();
+
+
+        // if (Yii::$app->request->isPost) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $article = $this->findModel($id);
+            $file = UploadedFile::getInstance($model, 'image');
+
+            // var_dump(strtolower(md5(uniqid($file->baseName))) . '.' . $file->extension);
+            // die();
+
+            if ($article->saveImage($model->uploadFile($file, $article->image))) {
+                return $this->redirect(['view', 'id' => $article->id]);
+            }
+
+        }
+        return $this->render('image', ['model' => $model]);
     }
 
     /**
