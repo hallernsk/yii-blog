@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "article".
@@ -104,4 +105,44 @@ class Article extends \yii\db\ActiveRecord
         }
 
     }
+
+    public function getTags()
+    {
+        return $this->hasMany(Tag::class, ['id' => 'tag_id'])
+            ->viaTable('article_tag', ['article_id' => 'id']);
+    }
+
+    public function getSelectedTags()
+    {
+        $selectedIds = $this->getTags()->select('id')->asArray()->all();
+        return ArrayHelper::getColumn($selectedIds, 'id');
+    }
+
+    public function saveTags($tags)
+    {
+        if (is_array($tags)) {
+            // ArticleTag::deleteAll(['article_id' => $this->id]);
+            $this->clearCurrentTags();
+            // var_dump('ttt');
+            // var_dump($tags);
+            // die();
+            foreach ($tags as $tag_id) {
+                $tag = Tag::findOne($tag_id);
+                // var_dump($tag);
+                // die();
+                $this->link('tags', $tag);
+                // var_dump('777777');
+                // die();
+            }
+            return true;
+        }
+    }
+
+    public function clearCurrentTags()
+    {
+        // $this->unlinkAll('tags', true);
+        ArticleTag::deleteAll(['article_id' => $this->id]);
+    }
+
+
 }

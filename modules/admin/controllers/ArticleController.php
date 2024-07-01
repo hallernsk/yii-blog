@@ -6,6 +6,7 @@ use app\models\Article;
 use app\models\ArticleSearch;
 use app\models\Category;
 use app\models\ImageUpload;
+use app\models\Tag;
 use Codeception\Lib\Di;
 use Yii;
 use yii\web\Controller;
@@ -168,6 +169,39 @@ class ArticleController extends Controller
         ]);
     }
 
+    public function actionSetTags($id)  // добавление тегов к статье
+    {
+        $article = $this->findModel($id);
+        // $selectedTags = $article->getSelectedTags();
+        $selectedTags = $article->getSelectedTags();
+        // $tags = Tag::find()->all();
+        $tags = ArrayHelper::map(Tag::find()->all(), 'id', 'title');
+
+        // var_dump($tags); // array !
+        // die();
+        if (Yii::$app->request->isPost) {
+
+            $tags = Yii::$app->request->post('tags');
+            // var_dump($tags);
+            // die();
+
+            if ($article->saveTags($tags)) {
+                // var_dump('saveTest:Ok');
+                // die();
+                return $this->redirect(['view', 'id' => $article->id]);
+            }
+        }
+
+
+        return $this->render('tags', [
+            'article' => $article,
+            'selectedTags' => $selectedTags,
+            'tags' => $tags
+        ]);
+
+        // $selectedTags = $article->getSelectedTags();
+        // $tags = Tag::find()->all();
+    }
 
 
     /**
