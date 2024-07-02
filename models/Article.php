@@ -121,18 +121,12 @@ class Article extends \yii\db\ActiveRecord
     public function saveTags($tags)
     {
         if (is_array($tags)) {
-            // ArticleTag::deleteAll(['article_id' => $this->id]);
             $this->clearCurrentTags();
-            // var_dump('ttt');
-            // var_dump($tags);
-            // die();
+
             foreach ($tags as $tag_id) {
                 $tag = Tag::findOne($tag_id);
-                // var_dump($tag);
-                // die();
                 $this->link('tags', $tag);
-                // var_dump('777777');
-                // die();
+
             }
             return true;
         }
@@ -140,7 +134,6 @@ class Article extends \yii\db\ActiveRecord
 
     public function clearCurrentTags()
     {
-        // $this->unlinkAll('tags', true);
         ArticleTag::deleteAll(['article_id' => $this->id]);
     }
 
