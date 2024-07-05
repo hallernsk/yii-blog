@@ -87,11 +87,10 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     <div class="address">
                         <h4 class="text-uppercase">contact Info</h4>
 
-                        <p> 14529/12 NK Streets, DC, KZ</p>
+                        <p> 221B, Baker Street, London, UK</p>
 
                         <p> Phone: +123 456 78900</p>
 
-                        <p>mytreasure.com</p>
                     </div>
                 </aside>
             </div>
