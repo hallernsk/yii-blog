@@ -56,9 +56,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      * @return static|null
      */
 
-    public static function findByUsername($username)
+    public static function findByEmail($email)
     {
-        return User::find()->where(['name' => $username])->one();
+        return User::find()->where(['email' => $email])->one();
     }
 
     /**
@@ -119,5 +119,10 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function getComments()
     {
         return $this->hasMany(Comment::class, ['user_id' => 'id']);
+    }
+
+    public function create()
+    {
+        return $this->save(false);
     }
 }
