@@ -31,11 +31,8 @@ class SignupForm extends Model
     {
         if ($this->validate()) {
             $user = new User();
-            // $user->attributes = $this->attributes();
-            $user->name = $this->name;
-            $user->email = $this->email;
-            $user->password = $this->password;
-            // $user->password = Yii::$app->security->generatePasswordHash($this->password);
+            $user->attributes = $this->attributes;
+
             return $user->create();
         }
         return false;
