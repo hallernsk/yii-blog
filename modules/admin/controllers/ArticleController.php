@@ -75,15 +75,11 @@ class ArticleController extends Controller
     public function actionCreate()
     {
         $model = new Article();
+
         $model->load($this->request->post()); // true
-        // var_dump(Yii::$app->request->post()); // array (size=2) ... '_csrf', 'Article' => array
-        // var_dump($_POST['Article']); // то же самое
-        // $model->title = $_POST['Article']['title'];
-        // var_dump($model->attributes);
-        // die();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->load($this->request->post()) && $model->saveArticle()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -106,7 +102,7 @@ class ArticleController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->saveArticle()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
