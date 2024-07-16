@@ -179,5 +179,9 @@ class Article extends \yii\db\ActiveRecord
         return $this->save();
     }
 
+    public function getComments()
+    {
+        return $this->hasMany(Comment::class, ['article_id' => 'id']);
+    }
 
 }
