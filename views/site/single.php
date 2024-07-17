@@ -37,6 +37,28 @@ use yii\helpers\Url;
                         </div>
                     </div>
                 </article>
+
+                <?php if(!empty($comments)): ?>
+                        <?php foreach ($comments as $comment): ?>
+
+                            <div class="bottom-comment"><!--bottom comment-->
+                                <div class="comment-img">
+                                    <img class="img-circle" src="<?= $comment->user->image ?>" alt="">
+                                </div>
+
+                                <div class="comment-text">
+                                    <h5><?= $comment->user->name ?></h5>
+                                    <p class="comment-date">
+                                        <?= $comment->getDate() ?>
+                                    </p>
+                                    <p class="para"><?= $comment->text ?></p>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+
+                <?php endif; ?>
+
+
                 <div class="top-comment"><!--top comment-->
                     <img src="/public/images/comment.jpg" class="pull-left img-circle" alt="">
                     <h4>Rubel Miah</h4>
@@ -164,19 +186,21 @@ use yii\helpers\Url;
                 <div class="leave-comment"><!--leave comment-->
                     <h4>Leave a reply</h4>
 
-
-                    <form class="form-horizontal contact-form" role="form" method="post" action="#">
-                  
-
+                    <?php $form = \yii\widgets\ActiveForm::begin([
+                    'action' => ['site/comment', 'id' => $article->id],
+                    'options' => ['class' => 'form-horizontal contact-form', 'role' => 'form']]); ?>              
              
                         <div class="form-group">
                             <div class="col-md-12">
-										<textarea class="form-control" rows="6" name="message"
-                                                  placeholder="Write Massage"></textarea>
+
+                                <?= $form->field($commentForm, 'comment')->textarea(['class' => 'form-control', 'placeholder' => 'Write Message'])->label(false) ?>
+
                             </div>
                         </div>
-                        <a href="#" class="btn send-btn">Post Comment</a>
-                    </form>
+                        <button class="btn send-btn">Post Comment</button>
+                    <?php \yii\widgets\ActiveForm::end(); ?>
+
+
                 </div><!--end leave comment-->
             </div>
             <?= $this->render('/partials/sidebar', [
