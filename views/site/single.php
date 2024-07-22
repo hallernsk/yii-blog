@@ -43,11 +43,12 @@ use yii\helpers\Url;
 
                             <div class="bottom-comment"><!--bottom comment-->
                                 <div class="comment-img">
-                                    <img class="img-circle" src="<?= $comment->user->image ?>" alt="">
+                                    <img width="50" class="img-circle" src="<?= $comment->user->image ?>" alt="">
                                 </div>
 
                                 <div class="comment-text">
                                     <h5><?= $comment->user->name ?></h5>
+                                    <h5><?= $comment->user->email ?></h5>
                                     <p class="comment-date">
                                         <?= $comment->getDate() ?>
                                     </p>
