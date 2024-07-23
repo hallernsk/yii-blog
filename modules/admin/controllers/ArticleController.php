@@ -130,7 +130,6 @@ class ArticleController extends Controller
         $model = new ImageUpload();
 
 
-        // if (Yii::$app->request->isPost) {
         if ($model->load(Yii::$app->request->post())) {
 
             $article = $this->findModel($id);
@@ -168,22 +167,15 @@ class ArticleController extends Controller
     public function actionSetTags($id)  // добавление тегов к статье
     {
         $article = $this->findModel($id);
-        // $selectedTags = $article->getSelectedTags();
         $selectedTags = $article->getSelectedTags();
-        // $tags = Tag::find()->all();
         $tags = ArrayHelper::map(Tag::find()->all(), 'id', 'title');
 
-        // var_dump($tags); // array !
-        // die();
+
         if (Yii::$app->request->isPost) {
 
             $tags = Yii::$app->request->post('tags');
-            // var_dump($tags);
-            // die();
 
             if ($article->saveTags($tags)) {
-                // var_dump('saveTest:Ok');
-                // die();
                 return $this->redirect(['view', 'id' => $article->id]);
             }
         }
@@ -195,8 +187,6 @@ class ArticleController extends Controller
             'tags' => $tags
         ]);
 
-        // $selectedTags = $article->getSelectedTags();
-        // $tags = Tag::find()->all();
     }
 
 

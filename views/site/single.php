@@ -48,7 +48,6 @@ use yii\helpers\Url;
 
                                 <div class="comment-text">
                                     <h5><?= $comment->user->name ?></h5>
-                                    <h5><?= $comment->user->email ?></h5>
                                     <p class="comment-date">
                                         <?= $comment->getDate() ?>
                                     </p>
