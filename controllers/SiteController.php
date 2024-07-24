@@ -152,8 +152,6 @@ class SiteController extends Controller
         if(Yii::$app->request->isPost) {
             $model->load(Yii::$app->request->post());
             if($model->saveComment($id)) {
-                // var_dump($id);
-                // die();
                 return $this->redirect(['site/view', 'id' => $id]);
             }
         }
