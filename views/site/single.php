@@ -186,6 +186,14 @@ use yii\helpers\Url;
                 <div class="leave-comment"><!--leave comment-->
                     <h4>Leave a reply</h4>
 
+                    <?php if(Yii::$app->session->hasFlash('comment')): ?>
+
+                        <div class="alert alert-success">
+                            <?= Yii::$app->session->getFlash('comment') ?>
+                        </div>
+
+                    <?php endif; ?>
+
                     <?php $form = \yii\widgets\ActiveForm::begin([
                     'action' => ['site/comment', 'id' => $article->id],
                     'options' => ['class' => 'form-horizontal contact-form', 'role' => 'form']]); ?>              
