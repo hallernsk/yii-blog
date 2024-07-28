@@ -182,7 +182,8 @@ use yii\helpers\Url;
                 </div>
                 <!-- end bottom comment-->
 
-
+                <?php if (!Yii::$app->user->isGuest): ?>    
+                           
                 <div class="leave-comment"><!--leave comment-->
                     <h4>Leave a reply</h4>
 
@@ -210,6 +211,8 @@ use yii\helpers\Url;
 
 
                 </div><!--end leave comment-->
+
+                <?php endif; ?>
             </div>
             <?= $this->render('/partials/sidebar', [
                 'popular' => $popular,
