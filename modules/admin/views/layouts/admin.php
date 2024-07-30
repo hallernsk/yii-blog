@@ -41,6 +41,7 @@ echo Nav::widget([
     'items' => [
         ['label' => 'Home', 'url' => ['default/index']],
         ['label' => 'Articles', 'url' => ['article/index']],
+        ['label' => 'Comments', 'url' => ['comment/index']],
         ['label' => 'Categories', 'url' => ['category/index']],
         ['label' => 'Tags', 'url' => ['tag/index']],
     ]
