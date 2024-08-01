@@ -28,24 +28,24 @@ class Module extends \yii\base\Module
         // custom initialization code goes here
     }
 
-    // public function behaviors()
-    // {
-    //     return [
-    //         'access' => [
-    //             'class' => AccessControl::className(),
-    //             'denyCallback' => function ($rule, $action) {
-    //                 throw new \yii\web\NotFoundHttpException();
-    //             },
-    //             'rules' => [
-    //                 [
-    //                     'allow' => true,
-    //                     'matchCallback' => function ($rule, $action) {
-    //                         return !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin;
-    //                     }
-    //                 ]
-    //             ]
-    //         ]
-    //     ];
-    // }
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'denyCallback' => function ($rule, $action) {
+                    throw new \yii\web\NotFoundHttpException();
+                },
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            return !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin;
+                        }
+                    ]
+                ]
+            ]
+        ];
+    }
 
 }

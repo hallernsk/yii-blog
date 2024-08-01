@@ -13,4 +13,11 @@ class CommentController extends Controller
 
         return $this->render('index', ['comments' => $comments]);
     }
+
+    public function actionDelete($id)
+    {
+        $comment = Comment::findOne($id);
+        $comment->delete();
+        return $this->redirect(['comment/index']);
+    }
 }
