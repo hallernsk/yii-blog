@@ -20,4 +20,20 @@ class CommentController extends Controller
         $comment->delete();
         return $this->redirect(['comment/index']);
     }
+
+    public function actionAllow($id)
+    {
+        $comment = Comment::findOne($id);
+        if ($comment->allow()) {
+            return $this->redirect(['comment/index']);
+        }
+    }
+
+    public function actionDisallow($id)
+    {
+        $comment = Comment::findOne($id);
+        if ($comment->disallow()) {
+            return $this->redirect(['comment/index']);
+        }
+    }
 }

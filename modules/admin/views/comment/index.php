@@ -37,6 +37,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         <td><?= $comment->user->name ?? 'Anonymous'?> </td>
                         <td><?= $comment->text ?> </td>
                         <td> 
+                            <?php if($comment->isAllowed()): ?>
+                                <a href="<?= Url::to(['comment/disallow', 'id' => $comment->id]) ?>" class="btn btn-warning">Disallow</a>
+                            <?php else: ?>
+                                <a href="<?= Url::to(['comment/allow', 'id' => $comment->id]) ?>" class="btn btn-success">Allow</a>
+                            <?php endif; ?>
                             <a href="<?= Url::to(['comment/delete', 'id' => $comment->id]) ?>" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>                  
