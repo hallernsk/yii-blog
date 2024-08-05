@@ -21,6 +21,10 @@ class Comment extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
+    public const STATUS_ALLOW = 1;
+    public const STATUS_DISALLOW = 0;
+
     public static function tableName()
     {
         return 'comment';
@@ -85,13 +89,13 @@ class Comment extends \yii\db\ActiveRecord
 
     public function allow()
     {
-        $this->status = 1;
+        $this->status = self::STATUS_ALLOW;
         return $this->save();
     }
 
     public function disallow()
     {
-        $this->status = 0;
+        $this->status = self::STATUS_DISALLOW;
         return $this->save();
     }
 
