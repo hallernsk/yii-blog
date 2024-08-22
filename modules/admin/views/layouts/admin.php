@@ -70,6 +70,69 @@ NavBar::end();
 </footer>
 
 <?php $this->endBody() ?>
+<?php $this->registerJsFile('@web/ckeditor/ckeditor.js'); ?>
+<?php $this->registerJsFile('@web/ckfinder/ckfinder.js'); ?>
+
+<!-- <script>
+    $(document).ready(function () {
+        var editor = CKEDITOR.replaceAll();
+        SCFinder.setupCKEditor(' editor ');            
+    })
+</script> -->
+
+<!-- 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Подождите, пока CKEditor не будет загружен
+    if (typeof ClassicEditor !== 'undefined') {
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                ckfinder: {
+                    uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
+                }
+            })
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+            })
+            .catch(error => {
+                console.error('There was a problem initializing the editor.', error);
+            });
+    } else {
+        console.error('ClassicEditor is not defined.');
+    }
+});
+</script> -->
+
+<!-- <script>
+    $(document).ready(function () {
+        CKEDITOR.replace('editor');
+    });
+</script> -->
+
+<!-- <script>
+    $(document).ready(function () {
+        CKEDITOR.replace('editor', {
+            filebrowserBrowseUrl: '/ckfinder/ckfinder.html',
+            filebrowserUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
+        });
+
+        // Инициализация CKFinder
+        CKFinder.setupCKEditor(CKEDITOR.instances.editor);
+    });
+</script> -->
+
+
+<script>
+    $(document).ready(function () {
+        CKEDITOR.replace('editor', {
+            filebrowserBrowseUrl: '/ckfinder/ckfinder.html',
+            filebrowserImageBrowseUrl: '/ckfinder/ckfinder.html?type=Images',
+            filebrowserUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+            filebrowserImageUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images'
+        });
+    });
+</script>
+
 </body>
 </html>
 <?php $this->endPage() ?>
